@@ -30,13 +30,16 @@
 	
 	while (correctInPlaceCount != numbersToGuess.length) {
 		//taking guesses from user until he enters atleast 4 nums
-		numberGuessed = undefined;
-		while (numberGuessed === undefined || numberGuessed.length < 4) {
+		do {
 			numberGuessed = '' + prompt(guessCount > 0 ?
 				('teisingi skaičiai savo vietoje: ' + correctInPlaceCount + '. Teisingi ne savo vietoje: ' + correctInWrongPlaceCount + '. Spėkite skaičių: ')
 					: ('Spėkite skaičių: ')).replace(/\D/g,'').substring(0, 4);
-		}
+			if (numberGuessed === undefined || numberGuessed.length < 4) {
+				alert('Prašau įvesti keturženklį skaičių, pavyzdžiui ' + (1000 + parseInt(Math.random() * 9000)));
+			}
+		} while (numberGuessed === undefined || numberGuessed.length < 4);   
 		console.log(numberGuessed);
+		++guessCount;
 	
 
 		//counting correct numbers in right place
@@ -76,7 +79,6 @@
 			}
 		}
 		console.log('teisingi skaičiai ne savo vietoje: ' + correctInWrongPlaceCount);
-		++guessCount;
 		console.log('spėjimai: ' + guessCount);
 		console.log('-------------------------------------------------------------------------------');
 	}
