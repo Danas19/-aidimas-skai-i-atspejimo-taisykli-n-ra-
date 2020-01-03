@@ -27,17 +27,22 @@
 	}
 	console.log(numbersToGuess);
 	
-	
+	bigWhile:	
 	while (correctInPlaceCount != numbersToGuess.length) {
 		//taking guesses from user until he enters atleast 4 nums
 		do {
 			numberGuessed = ('' + prompt(guessCount > 0 ?
 				('teisingi skaičiai savo vietoje: ' + correctInPlaceCount + '. Teisingi ne savo vietoje: ' + correctInWrongPlaceCount + '. Spėkite skaičių: ')
 					: ('Spėkite skaičių: '))).replace(/\D/g,'').substring(0, 4);
-			if (numberGuessed === undefined || numberGuessed.length < 4) {
+			if (numberGuessed.length == 0) {
+				//close game if nothing was entered
+				alert('Skaičius nebuvo įvestas, žaidimas buvo išjungtas.');
+				break bigWhile;
+			} else if (numberGuessed.length < numbersToGuess.length) {
+				//enter new number, too small num was entered
 				alert('Prašau įvesti keturženklį skaičių, pavyzdžiui ' + (1000 + parseInt(Math.random() * 9000)));
 			}
-		} while (numberGuessed === undefined || numberGuessed.length < 4);   
+		} while (numberGuessed === undefined || numberGuessed.length < numbersToGuess.length);   
 		console.log(numberGuessed);
 		++guessCount;
 	
