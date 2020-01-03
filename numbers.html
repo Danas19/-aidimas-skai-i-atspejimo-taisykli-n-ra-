@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="utf-8"/>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>Daugiau informacijos console.log()</h1>
+
+
+<script>
+	//numbers to guess(or number)
+	let numbersToGuess = [1, 2, 3, 4];
+	//correctly guessed number count
+	let correctInPlaceCount;
+	//numbers guessed and in numbersToGuess array, but in wrong place
+	let correctInWrongPlaceCount;
+	//number entered by user/player
+	let numberGuessed;
+	let guessCount = 0;
+	
+
+	//filling numbersToGuess array with random 0 to 10 nums.
+	for (let i = 0; i < numbersToGuess.length; i++) {
+		numbersToGuess[i] = parseInt(Math.random() * 10)
+	}
+	console.log(numbersToGuess);
+	
+	
+	while (correctInPlaceCount != numbersToGuess.length) {
+		//taking guesses from user until he enters atleast 4 nums
+		numberGuessed = undefined;
+		while (numberGuessed === undefined || numberGuessed.length < 4) {
+			numberGuessed = '' + prompt(guessCount > 0 ?
+				('teisingi skaičiai savo vietoje: ' + correctInPlaceCount + '. Teisingi ne savo vietoje: ' + correctInWrongPlaceCount + '. Spėkite skaičių: ')
+					: ('Spėkite skaičių: ')).replace(/\D/g,'').substring(0, 4);
+		}
+		console.log(numberGuessed);
+	
+
+		//counting correct numbers in right place
+		correctInPlaceCount = 0;
+		//tempNu... will maybe changed while counting correct nuumbers
+		let tempNumbersToGuess = [];
+		tempNumbersToGuess.push(...numbersToGuess);
+		for (let i = 0; i < tempNumbersToGuess.length; i++) {
+			if (tempNumbersToGuess[i] == numberGuessed.charAt(i)) {
+				++correctInPlaceCount;
+				tempNumbersToGuess[i] = -1;
+			}
+		}
+		//if all numbers correct
+		if (correctInPlaceCount == tempNumbersToGuess.length) {
+			console.log('Teisingai. ' + numberGuessed);
+			alert('TEISINGAI, skaičius buvo ' + numberGuessed + '. Spėjimai: ' + guessCount);
+			break;
+		}
+		console.log('teisingi skaičiai savo vietoje: ' + correctInPlaceCount);
+
+	
+		//counting correct not in place
+		correctInWrongPlaceCount = 0;
+		for (let i = 0; i < tempNumbersToGuess.length; i++) {
+			//if this i'th num. was guessed correctly already
+			if (tempNumbersToGuess[i] == -1) {
+				continue;
+			}
+			for (let j = 0; j < numberGuessed.length; j++) {
+				//if i'th numberToGuess = j'th number guessed
+				if (tempNumbersToGuess[i] == numberGuessed.charAt(j)) {
+					tempNumbersToGuess[i] = -1;
+					++correctInWrongPlaceCount;
+					break;
+				}
+			}
+		}
+		console.log('teisingi skaičiai ne savo vietoje: ' + correctInWrongPlaceCount);
+		++guessCount;
+		console.log('spėjimai: ' + guessCount);
+		console.log('-------------------------------------------------------------------------------');
+	}
+
+</script>
+</body>
+</html> 
