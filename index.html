@@ -31,9 +31,9 @@
 	while (correctInPlaceCount != numbersToGuess.length) {
 		//taking guesses from user until he enters atleast 4 nums
 		do {
-			numberGuessed = '' + prompt(guessCount > 0 ?
+			numberGuessed = ('' + prompt(guessCount > 0 ?
 				('teisingi skaičiai savo vietoje: ' + correctInPlaceCount + '. Teisingi ne savo vietoje: ' + correctInWrongPlaceCount + '. Spėkite skaičių: ')
-					: ('Spėkite skaičių: ')).replace(/\D/g,'').substring(0, 4);
+					: ('Spėkite skaičių: '))).replace(/\D/g,'').substring(0, 4);
 			if (numberGuessed === undefined || numberGuessed.length < 4) {
 				alert('Prašau įvesti keturženklį skaičių, pavyzdžiui ' + (1000 + parseInt(Math.random() * 9000)));
 			}
