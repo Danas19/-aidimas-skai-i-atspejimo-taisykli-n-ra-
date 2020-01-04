@@ -56,12 +56,13 @@
 			if (tempNumbersToGuess[i] == numberGuessed.charAt(i)) {
 				++correctInPlaceCount;
 				tempNumbersToGuess[i] = -1;
+				numberGuessed = numberGuessed.substring(0, i) + '-' + numberGuessed.substring(i + 1, numberGuessed.length);
 			}
 		}
 		//if all numbers correct
 		if (correctInPlaceCount == tempNumbersToGuess.length) {
-			console.log('Teisingai. ' + numberGuessed);
-			alert('TEISINGAI, skaičius buvo ' + numberGuessed + '. Spėjimai: ' + guessCount);
+			console.log('Teisingai. ' + numbersToGuess);
+			alert('TEISINGAI, skaičius buvo ' + numbersToGuess + '. Spėjimai: ' + guessCount);
 			break;
 		}
 		console.log('teisingi skaičiai savo vietoje: ' + correctInPlaceCount);
@@ -78,6 +79,7 @@
 				//if i'th numberToGuess = j'th number guessed
 				if (tempNumbersToGuess[i] == numberGuessed.charAt(j)) {
 					tempNumbersToGuess[i] = -1;
+					numberGuessed = numberGuessed.substring(0, j) + '-' + numberGuessed.substring(j + 1, numberGuessed.length);
 					++correctInWrongPlaceCount;
 					break;
 				}
